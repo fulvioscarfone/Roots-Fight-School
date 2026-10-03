@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>GAIA · Questionário do site</title>
+<meta name="description" content="Questionário para montar o site da academia.">
+<meta property="og:title" content="GAIA · Questionário do site">
+<meta property="og:description" content="Responda pelo celular em uns 15 minutos.">
+<meta name="robots" content="noindex">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Figtree:wght@400;500;600&display=swap">
+<style>
+/* Layout: one centred column, a sticky "faixa" progress bar whose graus fill as each section is answered */
+:root{
+  --bg:#f3f4f7; --surface:#ffffff; --ink:#151a2b; --muted:#5d6478; --line:#d9dce5;
+  --accent:#1d3fa8; --accent-soft:#e6ebf8; --belt:#151a2b; --tape:#f3f4f7; --good:#1f7a4d;
+  --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f1220; --surface:#181c2d; --ink:#eef0f6; --muted:#a2a8bb; --line:#2c3247;
+  --accent:#7d9bff; --accent-soft:#1f2747; --belt:#05060b; --tape:#e9ecf4; --good:#5fd39a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1220; --surface:#181c2d; --ink:#eef0f6; --muted:#a2a8bb; --line:#2c3247;
+  --accent:#7d9bff; --accent-soft:#1f2747; --belt:#05060b; --tape:#e9ecf4; --good:#5fd39a; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;padding-inline:16px;padding-block:0 48px}
+.wrap{max-width:720px;margin:0 auto}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:16px 12px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--display);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:13px;color:var(--accent)}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(28px,6vw,40px);line-height:1.05;margin:4px 0 12px;text-wrap:balance;text-transform:uppercase}
+.belt{display:flex;align-items:stretch;height:22px;border-radius:4px;overflow:hidden;background:var(--accent);box-shadow:inset 0 0 0 1px rgba(0,0,0,.15)}
+.belt .body{flex:1}
+.belt .tip{width:min(46%,260px);background:var(--belt);display:flex;gap:6px;align-items:stretch;justify-content:flex-end;padding:3px 10px}
+.belt .grau{width:12px;border-radius:1px;background:transparent;border:1px dashed color-mix(in srgb,var(--tape) 45%,transparent);transition:background .25s}
+.belt .grau.on{background:var(--tape);border-color:var(--tape)}
+.beltcap{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-top:6px}
+.intro{margin:20px 0 8px;color:var(--muted);max-width:62ch}
+nav.steps{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0}
+nav.steps button{font:600 13px var(--body);border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:999px;padding:6px 12px;cursor:pointer}
+nav.steps button[aria-current="step"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+nav.steps button.done:not([aria-current="step"]){color:var(--good);border-color:var(--good)}
+section.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:24px 20px;display:grid;gap:20px}
+h2{font-family:var(--display);font-weight:700;font-size:28px;text-transform:uppercase;margin:0;line-height:1.1}
+.lead{margin:-12px 0 0;color:var(--muted)}
+.field{display:grid;gap:6px;min-width:0}
+label,.label{font-weight:600;font-size:15px}
+.hint{font-size:13px;color:var(--muted);font-weight:400}
+input[type=text],input[type=email],input[type=tel],textarea{width:100%;font:16px var(--body);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+textarea{min-height:84px;resize:vertical}
+input:focus,textarea:focus,button:focus-visible,.chip input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;pointer-events:none}
+.chip span{display:inline-block;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--bg);cursor:pointer;font-size:15px}
+.chip input:checked+span{background:var(--accent-soft);border-color:var(--accent);color:var(--ink);font-weight:600}
+.prof{border:1px solid var(--line);border-radius:10px;padding:16px;display:grid;gap:14px}
+.prof h3{margin:0;font-family:var(--display);font-size:20px;text-transform:uppercase;letter-spacing:.03em}
+.rowpair{display:grid;grid-template-columns:110px 1fr;gap:10px;align-items:center}
+.rowpair .label{font-size:14px}
+@media (max-width:480px){.rowpair{grid-template-columns:1fr;gap:4px}}
+.faq{display:grid;gap:10px;border-top:1px dashed var(--line);padding-top:12px}
+.actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;margin-top:16px}
+.btn{font:600 16px var(--body);border-radius:8px;padding:12px 18px;cursor:pointer;border:1px solid var(--ink);background:transparent;color:var(--ink)}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn.wa{background:var(--good);border-color:var(--good);color:#fff}
+.btn[disabled]{opacity:.4;cursor:default}
+pre.summary{white-space:pre-wrap;word-break:break-word;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:14px;font:14px/1.5 var(--body);max-height:420px;overflow:auto;margin:0}
+.toast{font-size:14px;color:var(--good);min-height:1.2em}
+.saved{font-size:13px;color:var(--muted)}
+footer.brand{max-width:720px;margin:32px auto 0;text-align:center;font-size:13px;color:var(--muted)}
+footer.brand b{font-family:var(--display);letter-spacing:.14em;color:var(--ink)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow">GAIA · Site da academia</div>
+    <h1>Conta pra gente sobre a academia</h1>
+    <div class="belt" aria-hidden="true"><div class="body"></div><div class="tip" id="tip"></div></div>
+    <div class="beltcap"><span id="beltText">0 de 6 graus</span><span class="saved" id="saved">Respostas guardadas neste aparelho</span></div>
+  </header>
+
+  <p class="intro">Diego, com estas respostas a gente monta o site. Leva uns 15 minutos. O que você ainda não souber, deixa em branco que a gente define junto. Dá para fechar e voltar depois: o que você escreveu fica guardado neste aparelho.</p>
+
+  <nav class="steps" id="nav" aria-label="Seções"></nav>
+  <form id="form" novalidate></form>
+  <div class="actions">
+    <button type="button" class="btn" id="prev">Voltar</button>
+    <button type="button" class="btn primary" id="next">Próxima seção</button>
+  </div>
+</div>
+<footer class="brand">Feito por <b>GAIA</b></footer>
+
+<script>
+const STEPS=[
+ {t:"A academia",lead:"O básico para o site e o Google.",fields:[
+  ["nome","Nome da academia","Exatamente como deve aparecer"],
+  ["logo","Já tem logo?","Se tiver, manda o arquivo no WhatsApp. Se não, quer que a gente crie?"],
+  ["cores","Cores que você quer usar","Pode ser as cores da equipe"],
+  ["endereco","Endereço completo, com CEP",""],
+  ["referencia","Ponto de referência",""],
+  ["inauguracao","Data prevista de inauguração",""],
+  ["whats","WhatsApp da academia","","tel"],
+  ["email","E-mail da academia","","email"],
+  ["insta","Instagram da academia","Se já tiver, qual o @?"],
+  ["dominio","Endereço do site que você gostaria","Ex.: nomedaacademia.com.br"],
+  ["cnpj","A academia tem CNPJ ou MEI?",""]]},
+ {t:"Professores",lead:"É o que mais gera confiança em quem visita o site. Pode caprichar.",profs:true,fields:[
+  ["equipe","Equipe à qual a academia é filiada",""],
+  ["federacao","Federação","CBJJ, IBJJF, FJJRio etc."],
+  ["porque","Por que vocês decidiram abrir a academia?","","area"]]},
+ {t:"Aulas e horários",lead:"Marque as turmas e preencha a grade da semana.",chips:{id:"turmas",label:"Quais turmas vão ter?",opts:["Kids","Juvenil","Adulto iniciante","Adulto avançado / todos os níveis","Feminino","Competição","No-gi (sem kimono)"]},grade:true,fields:[
+  ["idades","Idades das turmas kids e juvenil","Ex.: Kids 4 a 7 e 8 a 12 anos"],
+  ["capacidade","Quantos alunos cabem no tatame por aula?",""],
+  ["kimono","Kimono é obrigatório? Tem cor exigida?",""],
+  ["semkimono","Iniciante pode começar sem kimono nas primeiras aulas?",""],
+  ["idademin","Idade mínima para começar",""]]},
+ {t:"Planos e preços",lead:"Pode deixar em branco o que ainda não estiver decidido.",planos:true,fields:[
+  ["mostrar","Quer mostrar os preços no site?","Ou prefere \"consulte pelo WhatsApp\""],
+  ["experimental","Aula experimental","É grátis? Quantas aulas? Precisa agendar?"],
+  ["matricula","Taxa de matrícula",""],
+  ["descontos","Descontos","Família, irmãos, estudantes, outros"],
+  ["pagamento","Formas de pagamento","Pix, cartão, boleto, dinheiro"],
+  ["apps","Aceita Gympass/Wellhub ou TotalPass?",""]]},
+ {t:"Espaço e diferenciais",lead:"Ajuda a pessoa a se imaginar treinando aí.",chips:{id:"estrutura",label:"O que o espaço tem?",opts:["Vestiário masculino","Vestiário feminino","Chuveiro","Ar-condicionado ou ventilação","Bebedouro","Estacionamento ou vaga na rua","Espaço para os pais esperarem","Acessibilidade","Venda de kimono, faixa ou rashguard"]},fields:[
+  ["tatame","Tamanho do tatame (m²)","Se souber"],
+  ["comochegar","Como chegar","Metrô, ônibus, ruas próximas","area"],
+  ["publico","Para quem é a academia?","Qual aluno você mais quer atrair?","area"],
+  ["porquevoces","Por que treinar com vocês e não em outra academia?","","area"],
+  ["diferenciais","Os 3 maiores diferenciais","","area"],
+  ["vizinhas","Outras academias de jiu-jitsu perto","Vila Isabel, Tijuca, Grajaú"],
+  ["referencias","Site ou Instagram de academia que você acha bonito","Cola o link"],
+  ["estilo","Estilo que você quer passar","Tradicional, moderno, familiar, competição…"]]},
+ {t:"Dúvidas e contato",lead:"As perguntas que você mais ouve viram a seção de dúvidas do site.",faq:true,fotos:true,fields:[
+  ["recebe","Para qual WhatsApp devem chegar os pedidos de aula experimental?","","tel"],
+  ["quemresponde","Quem vai responder os interessados?",""],
+  ["msgpronta","Mensagem que a pessoa já envia pronta","Ex.: \"Oi, quero agendar minha aula experimental\""],
+  ["tempo","Em quanto tempo você costuma conseguir responder?",""]]}
+];
+const PROF_Q=[["nome","Nome no site"],["faixa","Faixa e grau"],["tempo","Tempo de treino (jiu-jitsu ou outras artes marciais)"],["mestre","Mestre e linhagem"],["titulos","Títulos e conquistas"],["turmas","Turmas em que dá aula"],["historia","História no jiu-jitsu em poucas linhas","area"],["frase","Uma frase sobre o jeito de ensinar"]];
+const DIAS=["Segunda","Terça","Quarta","Quinta","Sexta","Sábado","Domingo"];
+const PLANOS=["Mensal","Trimestral","Semestral","Anual","Kids"];
+const FOTOS=["Fotos dos professores de kimono","Fotos do tatame e do espaço (luz natural)","Fotos da fachada e da entrada","Fotos de treinos, competições e graduações","Fotos com o mestre ou a equipe","Vídeos curtos de treino","Logo em boa resolução"];
+const KEY="gaia-questionario-site-v1";
+let data={}, step=0;
+try{data=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){data={}}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const val=id=>data[id]||"";
+function input(id,label,hint,type){
+  const h=hint?` <span class="hint">${esc(hint)}</span>`:"";
+  const ctl=type==="area"?`<textarea id="${id}" name="${id}">${esc(val(id))}</textarea>`
+    :`<input id="${id}" name="${id}" type="${type==="tel"?"tel":type==="email"?"email":"text"}" value="${esc(val(id))}" autocomplete="off">`;
+  return `<div class="field"><label for="${id}">${esc(label)}${h}</label>${ctl}</div>`;
+}
+function chips(id,label,opts){
+  return `<fieldset class="field" style="border:0;padding:0;margin:0"><legend class="label" style="margin-bottom:8px">${esc(label)} <span class="hint">Toque para marcar</span></legend><div class="chips">`+
+   opts.map((o,i)=>{const k=`${id}_${i}`;return `<label class="chip"><input type="checkbox" id="${k}" name="${k}" ${data[k]?"checked":""}><span>${esc(o)}</span></label>`}).join("")+`</div></fieldset>`;
+}
+function render(){
+  const s=STEPS[step]; let h=`<section class="card" aria-labelledby="h"><h2 id="h">${step+1}. ${esc(s.t)}</h2><p class="lead">${esc(s.lead)}</p>`;
+  if(s.profs){for(let p=1;p<=3;p++){h+=`<div class="prof"><h3>Professor ${p}${p===1?" · Diego":""}</h3>`+PROF_Q.map(([k,l,t])=>input(`prof${p}_${k}`,l,"",t)).join("")+`</div>`}}
+  if(s.chips) h+=chips(s.chips.id,s.chips.label,s.chips.opts);
+  if(s.grade){h+=`<div class="field"><span class="label">Grade da semana <span class="hint">Ex.: 07:00 Adulto · 18:00 Kids · 19:30 Adulto</span></span>`+
+    DIAS.map((d,i)=>`<div class="rowpair"><label class="label" for="dia_${i}">${d}</label><input id="dia_${i}" name="dia_${i}" type="text" value="${esc(val("dia_"+i))}"></div>`).join("")+`</div>`}
+  if(s.planos){h+=`<div class="field"><span class="label">Planos <span class="hint">Frequência (2x, 3x ou livre) e valor em R$</span></span>`+
+    PLANOS.map((p,i)=>`<div class="rowpair"><label class="label" for="plano_${i}">${p}</label><input id="plano_${i}" name="plano_${i}" type="text" placeholder="Ex.: 3x por semana · R$ 180" value="${esc(val("plano_"+i))}"></div>`).join("")+`</div>`}
+  h+=`<div class="grid2">`+s.fields.filter(f=>f[3]!=="area").map(f=>input(...f)).join("")+`</div>`;
+  h+=s.fields.filter(f=>f[3]==="area").map(f=>input(...f)).join("");
+  if(s.faq){h+=`<div class="field"><span class="label">Perguntas que as pessoas mais te fazem <span class="hint">Preciso ter experiência? Tenho que estar em forma? Posso começar com 40 anos ou mais? Meu filho é tímido, vai se adaptar?</span></span>`;
+    for(let i=0;i<5;i++)h+=`<div class="faq">${input("faq"+i+"_p","Pergunta "+(i+1))}${input("faq"+i+"_r","Sua resposta","", "area")}</div>`; h+=`</div>`}
+  if(s.fotos) h+=chips("fotos","Fotos e vídeos que você vai mandar pelo WhatsApp ou Google Drive",FOTOS);
+  if(step===STEPS.length) {}
+  h+=`</section>`; document.getElementById("form").innerHTML=h; updateChrome();
+}
+function renderReview(){
+  const txt=summary();
+  document.getElementById("form").innerHTML=`<section class="card"><h2>Tudo pronto</h2><p class="lead">Confere o resumo e manda pra gente. O botão verde abre o WhatsApp com tudo já escrito: é só escolher a conversa com o Fulvio e enviar. As fotos você manda depois, direto na conversa.</p>
+  <pre class="summary" id="sum">${esc(txt)}</pre>
+  <div class="actions" style="margin:0"><a class="btn wa" id="wa" href="https://wa.me/?text=${encodeURIComponent(txt)}" target="_blank" rel="noopener">Enviar pelo WhatsApp</a><button type="button" class="btn" id="copy">Copiar respostas</button></div>
+  <p class="toast" id="toast" role="status"></p></section>`;
+  document.getElementById("copy").onclick=async()=>{const t=document.getElementById("toast");
+    try{await navigator.clipboard.writeText(txt);t.textContent="Respostas copiadas. Agora é só colar no WhatsApp."}
+    catch(e){const r=document.createRange();r.selectNodeContents(document.getElementById("sum"));const sel=getSelection();sel.removeAllRanges();sel.addRange(r);t.textContent="Texto selecionado. Use copiar do seu aparelho."}};
+  updateChrome();
+}
+function stepDone(i){
+  const s=STEPS[i]; const ids=s.fields.map(f=>f[0]);
+  if(s.profs) ids.push("prof1_nome","prof1_faixa");
+  return ids.some(id=>(data[id]||"").trim());
+}
+function updateChrome(){
+  const n=STEPS.filter((_,i)=>stepDone(i)).length;
+  document.getElementById("tip").innerHTML=STEPS.map((_,i)=>`<span class="grau ${stepDone(i)?"on":""}"></span>`).join("");
+  document.getElementById("beltText").textContent=`${n} de 6 graus`;
+  document.getElementById("nav").innerHTML=STEPS.map((s,i)=>`<button type="button" data-i="${i}" class="${stepDone(i)?"done":""}" ${i===step?'aria-current="step"':""}>${i+1}. ${esc(s.t)}</button>`).join("")+
+    `<button type="button" data-i="${STEPS.length}" ${step===STEPS.length?'aria-current="step"':""}>Revisar e enviar</button>`;
+  document.getElementById("prev").disabled=step===0;
+  const nx=document.getElementById("next"); nx.hidden=step===STEPS.length;
+  nx.textContent=step===STEPS.length-1?"Revisar e enviar":"Próxima seção";
+}
+function go(i){step=Math.max(0,Math.min(STEPS.length,i)); step===STEPS.length?renderReview():render(); window.scrollTo({top:0})}
+document.getElementById("nav").addEventListener("click",e=>{const b=e.target.closest("button[data-i]");if(b)go(+b.dataset.i)});
+document.getElementById("prev").onclick=()=>go(step-1);
+document.getElementById("next").onclick=()=>go(step+1);
+document.getElementById("form").addEventListener("input",e=>{const el=e.target;if(!el.id)return;
+  data[el.id]=el.type==="checkbox"?el.checked:el.value;
+  try{localStorage.setItem(KEY,JSON.stringify(data))}catch(err){}
+  updateChrome();});
+function summary(){
+  const L=[]; const add=(l,v)=>{if(v&&String(v).trim())L.push(`${l}: ${String(v).trim()}`)};
+  const head=t=>{L.push("");L.push(`*${t.toUpperCase()}*`)};
+  L.push("*QUESTIONÁRIO DO SITE DA ACADEMIA*");
+  STEPS.forEach((s,si)=>{head(`${si+1}. ${s.t}`);
+    if(s.profs) for(let p=1;p<=3;p++){const has=PROF_Q.some(([k])=>val(`prof${p}_${k}`).trim());if(!has)continue;L.push(`— Professor ${p}`);PROF_Q.forEach(([k,l])=>add(l,val(`prof${p}_${k}`)))}
+    if(s.chips){const m=s.chips.opts.filter((_,i)=>data[`${s.chips.id}_${i}`]);if(m.length)add(s.chips.label.replace("?",""),m.join(", "))}
+    if(s.grade) DIAS.forEach((d,i)=>add(d,val("dia_"+i)));
+    if(s.planos) PLANOS.forEach((p,i)=>add("Plano "+p,val("plano_"+i)));
+    s.fields.forEach(([id,l])=>add(l,val(id)));
+    if(s.faq) for(let i=0;i<5;i++){const q=val(`faq${i}_p`).trim(),r=val(`faq${i}_r`).trim();if(q||r)L.push(`P: ${q||"-"}\nR: ${r||"-"}`)}
+    if(s.fotos){const m=FOTOS.filter((_,i)=>data["fotos_"+i]);if(m.length)add("Vou mandar",m.join(", "))}
+  });
+  return L.join("\n");
+}
+render();
+</script>
+
+</body>
+</html>
